@@ -1,0 +1,21 @@
+<div class="page">
+    <h2 class="title">
+</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel panel-default" style="border-radius:0px;">
+                <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Edit Transaction
+                </div>
+                <div class="panel-body">
+                    <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">
+                        <div class='form-group'><label>From</label> <select ng-model = 'transaction.from' class = 'form-control'> <option value =''>Please Select</option> <option ng-repeat = 'value in from' value='{{value._id}}'>{{value.name}}</option></select></div><div class='form-group'><label>To</label><input type='text' class='form-control' ng-model = 'transaction.to' placeholder='To' required > </div><div class='form-group'><label>Paiso</label><input type='number' class='form-control' ng-model = 'transaction.paiso' placeholder='Paiso' > </div><div class='form-group'><label for='exampleInputEmail1'>Comment</label><textarea class='form-control' ng-model = 'transaction.comment' placeholder='Comment' ></textarea></div><div class='form-group'><label>Status</label> <select ng-model = 'transaction.status' class = 'form-control'><option value ='yes'>Yes</option><option value ='no'>No</option></select></div><div class='form-group'><label>Voucher</label><input type='text' class='form-control' ng-model = 'transaction.voucher' placeholder='Voucher' > </div><div class='form-group'><label>Type</label> <select ng-model = 'transaction.type' class = 'form-control'><option value ='utov'>User to Vendor</option><option value ='utou'>User to User</option></select></div><div class='form-group'><label>Validtill</label><input type='text' class='form-control' ng-model = 'transaction.validtill' placeholder='Validtill' > </div><!--Add New Tags-->
+                        <div class="text-center" style="padding-bottom:20px;">
+                            <button type="submit" class="btn btn-primary all-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
