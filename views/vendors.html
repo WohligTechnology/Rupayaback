@@ -23,13 +23,21 @@
                             <table class="table table-bordered ">
                                 <thead>
                                     <tr class="bg-dark">
-                                        <th class="text-center">Name</th>
+                                      <th class="text-center">Name</th>
+                                      <th class="text-center">Offer Percent (%)</th>
+                                      <th class="text-center">Amount choices (if any)</th>
+                                        <th class="text-center">Amount Limit (if any)</th>
                                         <th colspan="2" class="text-center">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="value in vendors.data">
-                                        <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.offerpercent || '-'}}</td>
+                                      <td class="text-center"><span ng-repeat="amount in value.amountselect" >
+                                        {{amount || '-'}}&nbsp
+                                      </span></td>
+                                        <td class="text-center">{{value.amountlimit || '-'}}</td>
                                         <td class="text-center"><a ng-click="deletefun(value._id)" class="btn btn-primary all-btn"><i class="fa fa-times"></i></a>
                                         </td>
                                         <td class="text-center">

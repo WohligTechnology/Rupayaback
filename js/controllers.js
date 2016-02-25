@@ -171,6 +171,10 @@ phonecatControllers.controller('UserCtrl', function($scope, TemplateService, Nav
     $scope.reload = function(pagedata) {
         $scope.pagedata = pagedata;
         NavigationService.findLimitedUser($scope.pagedata, function(data, status) {
+          console.log(data.data);
+// _.each(data.data,function(key){
+//   key.date = new Date(key.date);
+// });
             $scope.user = data;
             $scope.pages = [];
             var newclass = '';

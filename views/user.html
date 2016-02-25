@@ -22,14 +22,27 @@
                         <div style="margin-top:10px;">
                             <table class="table table-bordered ">
                                 <thead>
-                                    <tr class="bg-dark">
-                                        <th class="text-center">Name</th>
-                                        <th colspan="2" class="text-center">Operations</th>
-                                    </tr>
+                                  <tr class="bg-dark">
+                                    <th class="text-center">Shmart consumer ID</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Mobile</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Current Balance</th>
+                                    <th class="text-center">Gender</th>
+                                      <th class="text-center">Date Of Birth</th>
+                                      <th colspan="2" class="text-center">Operations</th>
+                                  </tr>
+
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="value in user.data">
-                                        <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.consumer_id}}</td>
+                                      <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.mobile}}</td>
+                                      <td class="text-center">{{value.email}}</td>
+                                      <td class="text-center">{{value.balance}}</td>
+                                      <td class="text-center">{{value.gender}}</td>
+                                        <td class="text-center">{{value.date | date:'mediumDate'}}</td>
                                         <td class="text-center"><a ng-click="deletefun(value._id)" class="btn btn-primary all-btn"><i class="fa fa-times"></i></a>
                                         </td>
                                         <td class="text-center">
