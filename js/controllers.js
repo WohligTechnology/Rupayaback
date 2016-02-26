@@ -13,9 +13,9 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
     TemplateService.content = "views/dashboard.html";
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
-    //  NavigationService.countUser(function(data, status) {
-    //    $scope.user = data;
-    //  });
+     NavigationService.countUser(function(data, status) {
+       $scope.user = data;
+     });
 });
 phonecatControllers.controller('login', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
@@ -30,7 +30,7 @@ phonecatControllers.controller('login', function($scope, TemplateService, Naviga
         console.log($scope.login);
         if ($scope.login.email && $scope.login.password) {
             NavigationService.adminLogin($scope.login, function(data, status) {
-                if (data.value == "false") {
+                if (data.value == false) {
                     $scope.isValidLogin = 0;
                 } else {
                     $scope.isValidLogin = 1;
@@ -47,10 +47,10 @@ phonecatControllers.controller('login', function($scope, TemplateService, Naviga
 });
 phonecatControllers.controller('headerctrl', function($scope, TemplateService, $location, $routeParams, NavigationService) {
     $scope.template = TemplateService;
-    //  if (!$.jStorage.get("adminuser")) {
-    //    $location.url("/login");
-    //
-    //  }
+     if (!$.jStorage.get("adminuser")) {
+       $location.url("/login");
+
+     }
 });
 
 phonecatControllers.controller('createorder', function($scope, TemplateService, NavigationService, ngDialog, $routeParams, $location) {

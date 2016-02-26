@@ -1,4 +1,5 @@
-var adminurl = "http://104.197.111.152/";
+// var adminurl = "http://104.197.111.152/";
+var adminurl = "http://localhost:1337/";
 var adminlogin = {
     "username": "admin@admin.com",
     "password": "admin123"
@@ -31,7 +32,12 @@ var navigationservice = angular.module('navigationservice', [])
             active: '',
             link: '#/transaction',
             subnav: []
-        }, //Add New Left
+        },{
+          name:'Banner',
+          active:'',
+          link:'#/banner',
+          subnav:[]
+        } //Add New Left
 
     ];
 
@@ -59,9 +65,9 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }).success(callback);
         },
-        //    countUser: function(callback) {
-        //      $http.get(adminurl + "user/countusers").success(callback);
-        //    },
+           countUser: function(callback) {
+             $http.get(adminurl + "user/countusers").success(callback);
+           },
         setUser: function(data) {
             $.jStorage.set("user", data);
         },

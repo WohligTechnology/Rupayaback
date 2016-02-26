@@ -23,13 +23,17 @@
                             <table class="table table-bordered ">
                                 <thead>
                                     <tr class="bg-dark">
-                                        <th class="text-center">Name</th>
+                                      <th class="text-center">Name</th>
+                                      <th class="text-center">Listview / GridView (true/false)</th>
+                                        <th class="text-center">Icon</th>
                                         <th colspan="2" class="text-center">Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="value in category.data">
-                                        <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.name}}</td>
+                                      <td class="text-center">{{value.listview}}</td>
+                                        <td class="text-center">{{value.icon}}</td>
                                         <td class="text-center"><a ng-click="deletefun(value._id)" class="btn btn-primary all-btn"><i class="fa fa-times"></i></a>
                                         </td>
                                         <td class="text-center">
