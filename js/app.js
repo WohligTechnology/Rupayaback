@@ -57,7 +57,7 @@ firstapp.config(
                 templateUrl: 'views/template.html',
                 controller: 'editTransactionCtrl'
             }).when('/banner',{
-              templateUrl:'views/banner.html',
+              templateUrl:'views/template.html',
               controller:'BannerCtrl'
             }).//Add New Path
 
