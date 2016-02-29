@@ -23,6 +23,7 @@
     "angular-ui-select": "~0.12.1",
     "angular-ui-select2": "~0.0.5",
     "angular-ui-tinymce": "~0.0.12",
-    "ui-select": "*"
+    "ui-select": "*",
+    "angular-ui-sortable": "^0.13.4"
   }
 }

@@ -14,8 +14,11 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="lib/js/jquery-1.11.1.min.js"></script>
-    <script src="lib/js/angular.js"></script>
+    <!-- <script src="lib/js/jquery-1.11.1.min.js"></script>
+    <script src="lib/js/angular.js"></script> -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="lib/js/ngDialog.js"></script>
     <script src="lib/js/angular-route.min.js"></script>
@@ -26,6 +29,8 @@
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="lib/js/lodash.min.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-sortable/sortable.js"></script>
+    
 
 
 
