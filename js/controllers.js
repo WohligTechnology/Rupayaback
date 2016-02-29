@@ -548,7 +548,59 @@ phonecatControllers.controller('TransactionCtrl', function($scope, TemplateServi
         }
         //End Transaction
 });
-//transaction Controller
+phonecatControllers.controller('BannerCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+  console.log("here");
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Banner');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/banner.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.transaction = [];
+    $scope.pagedata = {};
+    $scope.pagedata.page = 1;
+    $scope.pagedata.limit = '20';
+    $scope.pagedata.search = '';
+    $scope.number = 100;
+    $scope.reload = function(pagedata) {
+        $scope.pagedata = pagedata;
+        NavigationService.findLimitedTransaction($scope.pagedata, function(data, status) {
+            $scope.transaction = data;
+            $scope.pages = [];
+            var newclass = '';
+            for (var i = 1; i <= data.totalpages; i++) {
+                if (pagedata.page == i) {
+                    newclass = 'active';
+                } else {
+                    newclass = '';
+                }
+                $scope.pages.push({
+                    pageno: i,
+                    class: newclass
+                });
+            }
+        });
+    }
+    $scope.reload($scope.pagedata);
+    $scope.confDelete = function() {
+        NavigationService.deleteTransaction(function(data, status) {
+            ngDialog.close();
+            window.location.reload();
+        });
+    }
+    $scope.deletefun = function(id) {
+            $.jStorage.set('deletetransaction', id);
+            ngDialog.open({
+                template: 'views/delete.html',
+                closeByEscape: false,
+                controller: 'TransactionCtrl',
+                closeByDocument: false
+            });
+        }
+        //End Transaction
+});
+//banner Controller
 //createTransaction Controller
 phonecatControllers.controller('createTransactionCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;

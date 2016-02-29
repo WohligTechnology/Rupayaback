@@ -66,7 +66,7 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
            countUser: function(callback) {
-             $http.get(adminurl + "user/countusers").success(callback);
+             $http.get(adminurl + "user/countusersOverTime").success(callback);
            },
         setUser: function(data) {
             $.jStorage.set("user", data);

@@ -56,7 +56,10 @@ firstapp.config(
             }).when('/edittransaction/:id', {
                 templateUrl: 'views/template.html',
                 controller: 'editTransactionCtrl'
-            }). //Add New Path
+            }).when('/banner',{
+              templateUrl:'views/banner.html',
+              controller:'BannerCtrl'
+            }).//Add New Path
 
         otherwise({
             redirectTo: '/login'
