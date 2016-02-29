@@ -699,8 +699,9 @@ phonecatControllers.controller('BannerCtrl', function($scope, TemplateService, N
     $scope.number = 100;
     $scope.reload = function(pagedata) {
         $scope.pagedata = pagedata;
-        NavigationService.findLimitedTransaction($scope.pagedata, function(data, status) {
-            $scope.transaction = data;
+        NavigationService.findLimitedBanner($scope.pagedata, function(data, status) {
+            $scope.banner = data;
+            console.log($scope.banner);
             $scope.pages = [];
             var newclass = '';
             for (var i = 1; i <= data.totalpages; i++) {
@@ -718,7 +719,7 @@ phonecatControllers.controller('BannerCtrl', function($scope, TemplateService, N
     }
     $scope.reload($scope.pagedata);
     $scope.confDelete = function() {
-        NavigationService.deleteTransaction(function(data, status) {
+        NavigationService.deleteBanner(function(data, status) {
             ngDialog.close();
             window.location.reload();
         });
@@ -728,11 +729,27 @@ phonecatControllers.controller('BannerCtrl', function($scope, TemplateService, N
             ngDialog.open({
                 template: 'views/delete.html',
                 closeByEscape: false,
-                controller: 'TransactionCtrl',
+                controller: 'BannerCtrl',
                 closeByDocument: false
             });
         }
         //End Transaction
+});
+phonecatControllers.controller('createBannerCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Banner');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/createbanner.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.banner = {};
+    $scope.submitForm = function() {
+        NavigationService.saveCategory($scope.banner, function(data, status) {
+            $location.url('/banner');
+        });
+    };
+    //createCategory
 });
 //banner Controller
 //createTransaction Controller

@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-md-12">
                 <section class="panel panel-default" style="border-radius:0px;">
-                    <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Show Transaction
+                    <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Show Banner
                     </div>
                     <div class="panel-body">
                         <div class="bot search-box">
                             <input type="search" name="search" ng-model="pagedata.type" placeholder="Search" ng-change="reload(pagedata);" />
                             <input type="search" name="search" ng-model="pagedata.to" placeholder="Search To" ng-change="reload(pagedata);" />
                             <input type="search" name="search" ng-model="pagedata.from" placeholder="Search From" ng-change="reload(pagedata);" />
-                            <a href="#/createtransaction" class="right btn btn-primary all-btn create-btn">Create Transaction</a>
+                            <a href="#/createbanner" class="right btn btn-primary all-btn create-btn">Create Banner</a>
                             <div class="pull-right">
                                 <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:'1',limit:pagedata.limit,search:pagedata.search})">
                                     <option value="20" selected>20</option>
@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="value in transaction.data">
+                                    <tr ng-repeat="value in banner.data">
                                       <td class="text-center">{{value.from}}</td>
                                       <td class="text-center">{{value.to}}</td>
                                       <td class="text-center">{{value.type}}</td>
@@ -43,7 +43,7 @@
                                         <td class="text-center"><a ng-click="deletefun(value._id)" class="btn btn-primary all-btn"><i class="fa fa-times"></i></a>
                                         </td>
                                         <!-- <td class="text-center">
-                                            <a href="#/edittransaction/{{value._id}}" class="btn btn-primary all-btn">
+                                            <a href="#/editbanner/{{value._id}}" class="btn btn-primary all-btn">
                                                 <i class="fa fa-pencil-square-o"></i>
                                             </a>
                                         </td> -->

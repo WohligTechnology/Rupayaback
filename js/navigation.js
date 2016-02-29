@@ -94,6 +94,17 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }).success(callback);
         },
+        findLimitedBanner: function(banner, callback) {
+            $http({
+                url: adminurl + 'banner/findlimited',
+                method: 'POST',
+                data: {
+                    'search': banner.search,
+                    'pagesize': parseInt(banner.limit),
+                    'pagenumber': parseInt(banner.page)
+                }
+            }).success(callback);
+        },
         deleteUser: function(callback) {
             $http({
                 url: adminurl + 'user/delete',

@@ -59,6 +59,9 @@ firstapp.config(
             }).when('/banner',{
               templateUrl:'views/template.html',
               controller:'BannerCtrl'
+            }).when('/createbanner', {
+                templateUrl: 'views/template.html',
+                controller: 'createBannerCtrl'
             }).//Add New Path
 
         otherwise({
