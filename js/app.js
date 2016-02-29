@@ -8,12 +8,9 @@ var firstapp = angular.module('firstapp', [
 
 firstapp.config(
     function($routeProvider, uiSelectConfig) {
-
         //        uiSelectConfig.theme = 'bootstrap';
         //        uiSelectConfig.resetSearchInput = true;
         //        uiSelectConfig.appendToBody = true;
-
-
         $routeProvider.
         when('/login', {
             templateUrl: 'views/template.html',

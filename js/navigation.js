@@ -203,7 +203,9 @@ var navigationservice = angular.module('navigationservice', [])
                 url: adminurl + 'transaction/findlimited',
                 method: 'POST',
                 data: {
-                    'search': transaction.search,
+                    'type': transaction.type,
+                    'to':transaction.to,
+                    'from':transaction.from,
                     'pagesize': parseInt(transaction.limit),
                     'pagenumber': parseInt(transaction.page)
                 }

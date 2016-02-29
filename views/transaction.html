@@ -9,7 +9,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="bot search-box">
-                            <input type="search" name="search" ng-model="pagedata.search" placeholder="Search" ng-change="reload(pagedata);" />
+                            <input type="search" name="search" ng-model="pagedata.type" placeholder="Search" ng-change="reload(pagedata);" />
+                            <input type="search" name="search" ng-model="pagedata.to" placeholder="Search To" ng-change="reload(pagedata);" />
+                            <input type="search" name="search" ng-model="pagedata.from" placeholder="Search From" ng-change="reload(pagedata);" />
                             <a href="#/createtransaction" class="right btn btn-primary all-btn create-btn">Create Transaction</a>
                             <div class="pull-right">
                                 <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:'1',limit:pagedata.limit,search:pagedata.search})">
@@ -25,7 +27,9 @@
                                     <tr class="bg-dark">
                                       <th class="text-center">From</th>
                                       <th class="text-center">To</th>
-                                        <th class="text-center">Type</th>
+                                      <th class="text-center">Type</th>
+                                      <th class="text-center">Amount</th>
+                                        <th class="text-center">Extra</th>
                                         <th colspan="2" class="text-center">Operations</th>
                                     </tr>
                                 </thead>
@@ -33,7 +37,9 @@
                                     <tr ng-repeat="value in transaction.data">
                                       <td class="text-center">{{value.from}}</td>
                                       <td class="text-center">{{value.to}}</td>
-                                        <td class="text-center">{{value.type}}</td>
+                                      <td class="text-center">{{value.type}}</td>
+                                      <td class="text-center">{{value.amount}}</td>
+                                        <td class="text-center">{{value.extra}}</td>
                                         <td class="text-center"><a ng-click="deletefun(value._id)" class="btn btn-primary all-btn"><i class="fa fa-times"></i></a>
                                         </td>
                                         <!-- <td class="text-center">
