@@ -18,6 +18,9 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
      NavigationService.countUser(function(data, status) {
        $scope.user = data;
      });
+      NavigationService.analyseTransaction(function(data, status) {
+        $scope.transaction = data;
+      });
 });
 phonecatControllers.controller('login', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;

@@ -164,6 +164,13 @@ var navigationservice = angular.module('navigationservice', [])
                 data: {}
             }).success(callback);
         },
+        analyseTransaction:function(callback){
+          $http({
+            url:adminurl+'transaction/analyseTransaction',
+            method:'POST',
+            data:{}
+          }).success(callback);
+        },
         getOneCategory: function(id, callback) {
             $http({
                 url: adminurl + 'category/findone',
