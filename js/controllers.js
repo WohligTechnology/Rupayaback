@@ -775,6 +775,45 @@ phonecatControllers.controller('createBannerCtrl', function($scope, TemplateServ
     //createCategory
 });
 //banner Controller
+//Edit Banner
+phonecatControllers.controller('editBannerCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog,$routeParams) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Banner');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/editbanner.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.banner = {};
+    NavigationService.getOneBanner($routeParams.id, function(data, status) {
+        $scope.banner = data; //Add More Array
+    });
+    $scope.submitForm = function() {
+        $scope.banner._id = $routeParams.id;
+        NavigationService.saveBanner($scope.banner, function(data, status) {
+            $location.url('/banner');
+        });
+    };
+    $scope.removeimagecerti = function() {
+        $scope.banner.imgurl = null;
+    };
+    $scope.onFileSelect = function($files, whichone, uploadtype) {
+        globalfunction.onFileSelect($files, function(image) {
+          console.log(image);
+            if (whichone == 1) {
+                $scope.banner.imgurl = image[0];
+                if (uploadtype == 'single') {
+                    $scope.banner.imgurl = image[0];
+                }
+            }
+        })
+    }
+    NavigationService.getVendor(function(data,status){
+      $scope.vendors=data;
+    });
+    //editTransaction
+});
+//End of edit Banner
 //createTransaction Controller
 phonecatControllers.controller('createTransactionCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;

@@ -112,6 +112,15 @@ var navigationservice = angular.module('navigationservice', [])
         data: banner
       }).success(callback);
     },
+    getOneBanner:function(id,callback){
+      $http({
+        url: adminurl + 'banner/findone',
+        method: 'POST',
+         data: {
+          '_id': id
+        }
+      }).success(callback)
+    },
     deleteUser: function(callback) {
       $http({
         url: adminurl + 'user/delete',
