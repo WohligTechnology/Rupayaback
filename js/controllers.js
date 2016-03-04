@@ -511,7 +511,13 @@ phonecatControllers.controller('createVendorsCtrl', function($scope, TemplateSer
     $scope.giveAmountLimit=false;
     $scope.openAmountSelector=false;
     $scope.submitForm = function() {
+      if($scope.openAmountSelector==true){
+        $scope.vendors.amountselect=_.map($scope.vendors.amountselect,function(key){
+return parseInt(key);
+        })
+      }
         NavigationService.saveVendors($scope.vendors, function(data, status) {
+
             $location.url('/vendors');
         });
     };
@@ -547,14 +553,19 @@ phonecatControllers.controller('createVendorsCtrl', function($scope, TemplateSer
         $scope.vendors.offerpercent=undefined;
       }
     }
+    $scope.convertToArray=function(input){
+      $scope.vendors.amountselect=input.split(',');
+    };
     $scope.selectAmountType=function(flag){
       $scope.giveAmountLimit=false;
       $scope.openAmountSelector=false;
       if(flag=="custom"){
         $scope.giveAmountLimit = true;
+        $scope.vendors.amountselect=[];
       }else{
         $scope.openAmountSelector=true;
-      }
+        $scope.vendors.amountlimit=undefined;
+            }
     }
     $scope.removeimagehomeslide = function(i) {
         $scope.vendors.bannerurl.splice(i, 1);
