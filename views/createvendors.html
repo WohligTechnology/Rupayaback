@@ -16,12 +16,13 @@
               <label>Email</label>
               <input type='email' class='form-control' ng-model='vendors.email' placeholder='Email' required> </div>
             <div class='form-group'>
-              <label for='exampleInputEmail1'>Description</label>
-              <textarea class='form-control' ng-model='vendors.description' placeholder='Description'></textarea>
+              <label >Description</label>
+              <textarea ui-tinymce class='form-control' ng-model='vendors.description'  ></textarea>
             </div>
             <div class='form-group'>
-              <label>Image</label>
-              <input type='text' class='form-control' ng-model='vendors.image' placeholder='Image'> </div>
+              <label >Terms and conditions</label>
+              <textarea ui-tinymce class='form-control' ng-model='vendors.tnc'  ></textarea>
+            </div>
             <div class='form-group'>
               <label>Order</label>
               <input type='number' class='form-control' ng-model='vendors.order' placeholder='Order'> </div>
@@ -32,14 +33,64 @@
                 <option ng-repeat='value in category' value='{{value._id}}'>{{value.name}}</option>
               </select>
             </div>
+            <div  class='form-group'>
+               <label for='exampleInputEmail1'>Logo</label>
+               <div class='scroll-x'>
+                  <div class='img-box'>
+                     <div class='many-img' ng-if='vendors.logourl'><img ng-src='{{vendors.logourl | uploadpath}}' width='200'>
+                        <button type='button' ng-click='removeimagecerti();' class='btn btn-danger close-btn'><i class='glyphicon glyphicon-trash'></i></button>
+                     </div>
+                  </div>
+               </div>
+               <div class='upload-div'>
+                  <div ng-init='httpMethod=POST;howToSend = 1;'></div>
+                  <div class='upload-buttons'>
+                     <input type='file' name='file' ng-file-select='onFileSelect($files,1,"single")' onclick='this.value=null' required>
+                  </div>
+               </div>
+            </div>
             <div class='form-group'>
-              <label>Cashback</label>
-              <input type='text' class='form-control' ng-model='vendors.cashback' placeholder='Cashback'> </div>
+               <label for='exampleInputEmail1'>Banners</label>
+               <div class=''>
+                  <div class='img-box'>
+                     <ul ui-sortable ng-model='vendors.bannerurl' ng-if='vendors.bannerurl.length!=0'>
+                        <li ng-repeat='bill in vendors.bannerurl' class='many-img'><img ng-src='{{bill | uploadpath}}' ng-if='vendors.bannerurl.length!=0' width='200'>
+                           <button type='button' ng-click='removeimagehomeslide(vendors.bannerurl.indexOf(bill));' class='btn btn-danger close-btn'><i class='glyphicon glyphicon-trash'></i></button>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class='upload-div'>
+                  <div ng-init='httpMethod=POST;howToSend = 1;'></div>
+                  <div class='upload-buttons'>
+                     <input type='file' name='file' ng-file-select='onFileSelect($files,2,"multiple")' onclick='this.value=null' multiple>
+                  </div>
+               </div>
+            </div>
+            <div class='form-group'>
+              <label>Keep Cashback Offer</label>
+              <select type="text" ng-model='vendors.hasoffer' ng-change="keepOffer(vendors.hasoffer)" class='form-control'>
+                <option value='true'>Yes</option>
+                <option value='false'>No</option>
+              </select>
+            </div>
+
+            <div class='form-group' ng-show="keepCashback">
+              <label>Cashback (%)</label>
+              <input type='number' class='form-control' ng-model='vendors.offerpercent' placeholder='Cashback'> </div>
+              <div class='form-group'>
+                <label>Amount input type</label>
+                <select type="text" ng-model='vendors.input' ng-change="selectAmountType(vendors.input)" class='form-control'>
+                  <option value='fixed'>Fixed</option>
+                  <option value='multiple'>Multiple</option>
+                  <option value='custom'>Variable</option>
+                </select>
+              </div>
             <div class='form-group'>
               <label>Status</label>
               <select ng-model='vendors.status' class='form-control'>
-                <option value='yes'>Yes</option>
-                <option value='no'>No</option>
+                <option value='true'>Yes</option>
+                <option value='false'>No</option>
               </select>
             </div>
             <!--Add New Tags-->

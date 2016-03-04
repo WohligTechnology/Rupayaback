@@ -3,7 +3,7 @@ var selectedData = [];
 var abc = {};
 var globalfunction = {};
 
-var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngDialog', 'angularFileUpload', 'ui.select', 'ngSanitize','ui.sortable']);
+var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngDialog', 'angularFileUpload', 'ui.select', 'ngSanitize','ui.sortable','ui.tinymce']);
 // window.uploadUrl = 'http://104.197.23.70/user/uploadfile';
 //window.uploadUrl = 'http://192.168.2.22:1337/user/uploadfile';
 window.uploadUrl = 'http://localhost:1337/uploadfile/uploadfile';
@@ -506,6 +506,10 @@ phonecatControllers.controller('createVendorsCtrl', function($scope, TemplateSer
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.vendors = {};
+    $scope.vendors.bannerurl=[];
+    $scope.keepCashback=false;
+    $scope.giveAmountLimit=false;
+    $scope.openAmountSelector=false;
     $scope.submitForm = function() {
         NavigationService.saveVendors($scope.vendors, function(data, status) {
             $location.url('/vendors');
@@ -514,6 +518,47 @@ phonecatControllers.controller('createVendorsCtrl', function($scope, TemplateSer
     NavigationService.getCategory(function(data, status) {
         $scope.category = data;
     });
+    $scope.removeimagecerti = function() {
+        $scope.vendors.certi = '';
+    };
+    $scope.onFileSelect = function($files, whichone, uploadtype) {
+        globalfunction.onFileSelect($files, function(image) {
+            if (whichone == 1) {
+                $scope.vendors.logourl = image;
+                if (uploadtype == 'single') {
+                    $scope.vendors.logourl = image[0];
+                }
+            } else if (whichone == 2) {
+                $scope.vendors.bannerurl = image;
+                if (uploadtype == 'single') {
+                    $scope.vendors.bannerurl = image[0];
+                }
+            }
+        })
+    }
+    $scope.keepOffer=function(flag){
+      $scope.keepCashback=false;
+      $scope.vendors.hasoffer= (flag == "true")?true:false;
+      if($scope.vendors.hasoffer === true){
+        $scope.keepCashback =true;
+        $scope.vendors.offerpercent=0;
+      }else{
+        $scope.keepCashback =false;
+        $scope.vendors.offerpercent=undefined;
+      }
+    }
+    $scope.selectAmountType=function(flag){
+      $scope.giveAmountLimit=false;
+      $scope.openAmountSelector=false;
+      if(flag=="custom"){
+        $scope.giveAmountLimit = true;
+      }else{
+        $scope.openAmountSelector=true;
+      }
+    }
+    $scope.removeimagehomeslide = function(i) {
+        $scope.vendors.bannerurl.splice(i, 1);
+    };
     //createVendors
 });
 //createVendors Controller
@@ -723,6 +768,11 @@ phonecatControllers.controller('BannerCtrl', function($scope, TemplateService, N
         });
     }
     $scope.reload($scope.pagedata);
+    NavigationService.getVendor(function(data,status){
+      $scope.vendors=data;
+      console.log();
+
+    });
     $scope.confDelete = function() {
         NavigationService.deleteBanner(function(data, status) {
             ngDialog.close();

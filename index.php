@@ -20,6 +20,8 @@
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script src="lib/js/ngDialog.js"></script>
     <script src="lib/js/angular-route.min.js"></script>
     <script src="lib/js/angular-animate.min.js"></script>
@@ -30,7 +32,7 @@
     <script src="lib/js/lodash.min.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-sortable/sortable.js"></script>
-    
+
 
 
 

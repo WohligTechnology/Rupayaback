@@ -22,8 +22,9 @@
     "angular-sanitize": "~1.4.4",
     "angular-ui-select": "~0.12.1",
     "angular-ui-select2": "~0.0.5",
-    "angular-ui-tinymce": "~0.0.12",
+    "angular-ui-tinymce": "^0.0.14",
     "ui-select": "*",
-    "angular-ui-sortable": "^0.13.4"
+    "angular-ui-sortable": "^0.13.4",
+    "tinymce": "^4.3.7"
   }
 }
