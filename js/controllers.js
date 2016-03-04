@@ -6,7 +6,7 @@ var globalfunction = {};
 var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngDialog', 'angularFileUpload', 'ui.select', 'ngSanitize','ui.sortable']);
 // window.uploadUrl = 'http://104.197.23.70/user/uploadfile';
 //window.uploadUrl = 'http://192.168.2.22:1337/user/uploadfile';
-window.uploadUrl = 'http://localhost:1337/user/uploadfile';
+window.uploadUrl = 'http://localhost:1337/uploadfile/uploadfile';
 phonecatControllers.controller('home', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Dashboard");
@@ -50,7 +50,7 @@ phonecatControllers.controller('login', function($scope, TemplateService, Naviga
 
     }
 });
-phonecatControllers.controller('headerctrl', function($scope, TemplateService, $location, $routeParams, NavigationService) {
+phonecatControllers.controller('headerctrl', function($scope, TemplateService, $location, $routeParams, NavigationService,$upload,$timeout) {
     $scope.template = TemplateService;
      if (!$.jStorage.get("adminuser")) {
        $location.url("/login");
@@ -133,10 +133,12 @@ phonecatControllers.controller('headerctrl', function($scope, TemplateService, $
              });
              $scope.upload[index].then(function(response) {
                  $timeout(function() {
+                   console.log(response);
                      $scope.uploadResult.push(response.data);
                      imagejstupld = response.data;
+
                      if (imagejstupld != "") {
-                         $scope.images.push(imagejstupld.files[0].fd);
+                         $scope.images.push(imagejstupld.fileId);
                          console.log($scope.images);
                          imagejstupld = "";
                          if (arrLength == $scope.images.length) {
@@ -748,10 +750,28 @@ phonecatControllers.controller('createBannerCtrl', function($scope, TemplateServ
     $scope.navigation = NavigationService.getnav();
     $scope.banner = {};
     $scope.submitForm = function() {
-        NavigationService.saveCategory($scope.banner, function(data, status) {
+        NavigationService.saveBanner($scope.banner, function(data, status) {
+          $scope.banner
             $location.url('/banner');
         });
     };
+    $scope.removeimagecerti = function() {
+        $scope.banner.imgurl = null;
+    };
+    $scope.onFileSelect = function($files, whichone, uploadtype) {
+        globalfunction.onFileSelect($files, function(image) {
+          console.log(image);
+            if (whichone == 1) {
+                $scope.banner.imgurl = image[0];
+                if (uploadtype == 'single') {
+                    $scope.banner.imgurl = image[0];
+                }
+            }
+        })
+    }
+    NavigationService.getVendor(function(data,status){
+      $scope.vendors=data;
+    });
     //createCategory
 });
 //banner Controller
