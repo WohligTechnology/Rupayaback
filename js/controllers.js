@@ -703,7 +703,8 @@ phonecatControllers.controller('editVendorsCtrl', function($scope, TemplateServi
         console.log(data);
         $scope.keepOffer($scope.vendors.hasoffer);
         $scope.selectAmountType($scope.vendors.input);
-
+        $scope.vendors.hasoffer= ($scope.vendors.hasoffer == true)?"true":"false";
+        $scope.vendors.hasoffer= ($scope.vendors.hasoffer == true)?"true":"false";
     });
     $scope.submitForm = function() {
         $scope.vendors._id = $routeParams.id;
@@ -759,8 +760,11 @@ return parseInt(key);
     }
     $scope.keepOffer=function(flag){
       $scope.keepCashback=false;
-      $scope.vendors.hasoffer= (flag == "true")?true:false;
-      console.log($scope.vendors.hasoffer);
+      if(flag=="true"){
+        $scope.vendors.hasoffer =true;
+      }else if(flag == "false"){
+        $scope.vendors.hasoffer=false;
+      }
       if($scope.vendors.hasoffer === true){
         $scope.keepCashback =true;
         $scope.vendors.offerpercent=0;
@@ -853,6 +857,8 @@ phonecatControllers.controller('createCategoryCtrl', function($scope, TemplateSe
     $scope.navigation = NavigationService.getnav();
     $scope.category = {};
     $scope.submitForm = function() {
+      $scope.category.status = ($scope.category.status == "true")?true:false;
+      $scope.category.listview = ($scope.category.listview == "true")?true:false;
         NavigationService.saveCategory($scope.category, function(data, status) {
             $location.url('/category');
         });
@@ -872,9 +878,13 @@ phonecatControllers.controller('editCategoryCtrl', function($scope, TemplateServ
     $scope.category = {};
     NavigationService.getOneCategory($routeParams.id, function(data, status) {
         $scope.category = data; //Add More Array
+        $scope.category.status = ($scope.category.status == true)?"true":"false";
+        $scope.category.listview = ($scope.category.listview == true)?"true":"false";
     });
     $scope.submitForm = function() {
         $scope.category._id = $routeParams.id;
+        $scope.category.status = ($scope.category.status == "true")?true:false;
+        $scope.category.listview = ($scope.category.listview == "true")?true:false;
         NavigationService.saveCategory($scope.category, function(data, status) {
             $location.url('/category');
         });
