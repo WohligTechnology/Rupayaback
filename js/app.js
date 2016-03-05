@@ -65,6 +65,9 @@ firstapp.config(
             }).when('/editbanner/:id', {
                 templateUrl: 'views/template.html',
                 controller: 'editBannerCtrl'
+            }).when('/broadcast', {
+                templateUrl: 'views/template.html',
+                controller: 'broadcastCtrl'
             }).//Add New Path
 
         otherwise({
@@ -129,6 +132,67 @@ firstapp.directive('createovalidation', function() {
         }
     }
 });
+firstapp.directive('barhighchart', function() {
+    return {
+        restrict: 'A',
+        scope: {
+            obj: "="
+        },
+        replace:true,
+        templateUrl: 'views/directive/barhighchart.html',
+        link: function($scope, element, attr) {
+          console.log("gher");
+                       console.log($scope.obj);
+
+            $element = $(element);
+            $element.children('#container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '<span style="color:#9b59b6;margin-left:20px;">Make Your Choice</span>'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        //                        stacking: 'percent',
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [{
+                    //                    name: "Brands",
+                    colorByPoint: true,
+                    data: $scope.obj
+                }],
+                credits: {
+                    enabled: false
+                },
+            });
+        }
+    };
+});
+
 
 
 firstapp.directive('capitalizeFirst', function($parse) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="firstapp">
 
 <head ng-controller="headerctrl">
-    <title ng-bind="'Aura Art - '+template.title"></title>
+    <title ng-bind="'PAiSO - '+template.title"></title>
     <!--    <link rel="shortcut icon" href="img/favicon.png" />-->
     <link rel="stylesheet" type="text.css" href="bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css" />
@@ -22,6 +22,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/tinymce-dist/tinymce.js"></script>
     <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
     <script src="lib/js/ngDialog.js"></script>
     <script src="lib/js/angular-route.min.js"></script>
     <script src="lib/js/angular-animate.min.js"></script>

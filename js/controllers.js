@@ -20,7 +20,125 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
      });
       NavigationService.analyseTransaction(function(data, status) {
         $scope.transaction = data;
+        console.log(data);
+        $scope.pluckedCount = _.map($scope.transaction,function(key){
+          return {
+            name:key.name,
+            y:key.count
+          };
+        });
+        $scope.pluckedBrand = _.map($scope.transaction,function(key){
+          return key.name;
+        });
+        $scope.pluckedAmount = _.map($scope.transaction,function(key){
+          return key.amount;
+        });
+        $scope.charts($scope.pluckedCount);
+        $scope.charts2($scope.pluckedBrand,$scope.pluckedAmount);
+
       });
+      $scope.charts=function(data){
+
+    // Radialize the colors
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+        return {
+            radialGradient: {
+                cx: 0.5,
+                cy: 0.3,
+                r: 0.7
+            },
+            stops: [
+                [0, color],
+                [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+            ]
+        };
+    });
+
+    // Build the chart
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        credits:{
+          enabled:false
+        },
+        title: {
+            text: 'Brands Redeemed'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    },
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            name: 'Redeemed (percentage)',
+            data: data
+        }]
+    });
+      }
+      $scope.charts2=function(brands,amount){
+    $('#container2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        credits:{
+          enabled:false
+        },
+        title: {
+            text: 'Brands amounts redeemed'
+        },
+        legend:{
+          enabled:false
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com'
+        },
+        xAxis: {
+            categories: brands,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Amount (Rupees)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+          name:'Amount',
+            data: amount
+
+        }]
+    });
+      }
 });
 phonecatControllers.controller('login', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
@@ -585,6 +703,10 @@ phonecatControllers.controller('editVendorsCtrl', function($scope, TemplateServi
     $scope.vendors = {};
     NavigationService.getOneVendors($routeParams.id, function(data, status) {
         $scope.vendors = data; //Add More Array
+        console.log(data);
+        $scope.keepOffer($scope.vendors.hasoffer);
+        $scope.selectAmountType($scope.vendors.input);
+
     });
     $scope.submitForm = function() {
         $scope.vendors._id = $routeParams.id;
@@ -592,9 +714,81 @@ phonecatControllers.controller('editVendorsCtrl', function($scope, TemplateServi
             $location.url('/vendors');
         });
     };
+    $scope.submitForm = function() {
+      if($scope.openAmountSelector==true){
+        $scope.vendors.amountselect=_.map($scope.vendors.amountselect,function(key){
+return parseInt(key);
+        })
+      }
+        NavigationService.saveVendors($scope.vendors, function(data, status) {
+
+            $location.url('/vendors');
+        });
+    };
     NavigationService.getCategory(function(data, status) {
         $scope.category = data;
     });
+    $scope.removeimagecerti = function() {
+        $scope.vendors.certi = '';
+    };
+    $scope.onFileSelect = function($files, whichone, uploadtype) {
+        globalfunction.onFileSelect($files, function(image) {
+            if (whichone == 1) {
+                if (uploadtype == 'multiple') {
+                    if ($scope.vendors.logourl.length > 0) {
+                        _.each(image, function(n) {
+                            $scope.vendors.logourl.push(n)
+                        })
+                    } else {
+                        $scope.vendors.logourl = image;
+                    }
+                } else if (uploadtype == 'single') {
+                    $scope.vendors.logourl = image[0];
+                }
+            } else if (whichone == 2) {
+                if (uploadtype == 'multiple') {
+                    if ($scope.vendors.bannerurl.length > 0) {
+                        _.each(image, function(n) {
+                            $scope.vendors.bannerurl.push(n)
+                        })
+                    } else {
+                        $scope.vendors.bannerurl = image;
+                    }
+                } else if (uploadtype == 'single') {
+                    $scope.vendors.bannerurl = image[0];
+                }
+            }
+        })
+    }
+    $scope.keepOffer=function(flag){
+      $scope.keepCashback=false;
+      $scope.vendors.hasoffer= (flag == "true")?true:false;
+      console.log($scope.vendors.hasoffer);
+      if($scope.vendors.hasoffer === true){
+        $scope.keepCashback =true;
+        $scope.vendors.offerpercent=0;
+      }else{
+        $scope.keepCashback =false;
+        $scope.vendors.offerpercent=undefined;
+      }
+    }
+    $scope.convertToArray=function(input){
+      $scope.vendors.amountselect=input.split(',');
+    };
+    $scope.selectAmountType=function(flag){
+      $scope.giveAmountLimit=false;
+      $scope.openAmountSelector=false;
+      if(flag=="custom"){
+        $scope.giveAmountLimit = true;
+        $scope.vendors.amountselect=[];
+      }else{
+        $scope.openAmountSelector=true;
+        $scope.vendors.amountlimit=undefined;
+            }
+    }
+    $scope.removeimagehomeslide = function(i) {
+        $scope.vendors.bannerurl.splice(i, 1);
+    };
     //editVendors
 });
 //editVendors Controller
@@ -708,6 +902,7 @@ phonecatControllers.controller('TransactionCtrl', function($scope, TemplateServi
     $scope.number = 100;
     $scope.reload = function(pagedata) {
         $scope.pagedata = pagedata;
+        console.log(pagedata);
         NavigationService.findLimitedTransaction($scope.pagedata, function(data, status) {
             $scope.transaction = data;
             $scope.pages = [];
@@ -920,5 +1115,30 @@ phonecatControllers.controller('editTransactionCtrl', function($scope, TemplateS
     });
     //editTransaction
 });
+
 //editTransaction Controller
+phonecatControllers.controller('broadcastCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Broadcast');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/broadcast.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.transaction = {};
+    NavigationService.getOneTransaction($routeParams.id, function(data, status) {
+        $scope.transaction = data; //Add More Array
+    });
+    $scope.submitForm = function() {
+        $scope.transaction._id = $routeParams.id;
+        NavigationService.saveTransaction($scope.transaction, function(data, status) {
+            $location.url('/transaction');
+        });
+    };
+    NavigationService.getUser(function(data, status) {
+        $scope.from = data;
+    });
+    //editTransaction
+});
+
 //Add New Controller

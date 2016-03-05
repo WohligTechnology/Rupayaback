@@ -25,6 +25,7 @@
     "angular-ui-tinymce": "^0.0.14",
     "ui-select": "*",
     "angular-ui-sortable": "^0.13.4",
-    "tinymce": "^4.3.7"
+    "tinymce": "^4.3.7",
+    "highcharts": "^4.2.3"
   }
 }

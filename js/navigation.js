@@ -37,6 +37,11 @@ var navigationservice = angular.module('navigationservice', [])
       active: '',
       link: '#/banner',
       subnav: []
+    },{
+      name: 'Broadcast',
+      active: '',
+      link: '#/broadcast',
+      subnav: []
     } //Add New Left
 
   ];
@@ -240,6 +245,7 @@ var navigationservice = angular.module('navigationservice', [])
       }).success(callback);
     },
     findLimitedTransaction: function(transaction, callback) {
+      console.log(transaction);
       $http({
         url: adminurl + 'transaction/findlimited',
         method: 'POST',

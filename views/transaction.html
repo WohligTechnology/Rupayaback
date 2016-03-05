@@ -14,7 +14,7 @@
                             <input type="search" name="search" ng-model="pagedata.from" placeholder="Search From" ng-change="reload(pagedata);" />
                             <a href="#/createtransaction" class="right btn btn-primary all-btn create-btn">Create Transaction</a>
                             <div class="pull-right">
-                                <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:'1',limit:pagedata.limit,search:pagedata.search})">
+                                <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:'1',limit:pagedata.limit,type:pagedata.type})">
                                     <option value="20" selected>20</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -52,7 +52,7 @@
                             </table>
                             <nav>
                                 <ul class="pagination">
-                                    <li ng-class="page.class" ng-repeat="page in pages"><a ng-click="reload({page:page.pageno,limit:pagedata.limit,search:pagedata.search});">{{page.pageno}}</a>
+                                    <li ng-class="page.class" ng-repeat="page in pages"><a ng-click="reload({page:page.pageno,limit:pagedata.limit,type:pagedata.type});">{{page.pageno}}</a>
                                     </li>
                                 </ul>
                             </nav>
