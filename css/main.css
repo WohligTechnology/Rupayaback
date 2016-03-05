@@ -468,3 +468,17 @@ h4.labeler {
 .ui-selecter input {
     padding: 10px;
 }
+.emer{
+  border-bottom: 1px solid #0060AA;
+margin-left: 0px;
+margin-right: 0px;
+}
+.border-right{
+      border-right: 1px solid;
+}
+.pl15{
+      padding: 0px 0px 0px 15px;
+}
+.pr15{
+      padding: 0px 15px 0px 0px;
+}

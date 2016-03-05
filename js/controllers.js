@@ -6,7 +6,7 @@ var globalfunction = {};
 var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngDialog', 'angularFileUpload', 'ui.select', 'ngSanitize','ui.sortable','ui.tinymce']);
 // window.uploadUrl = 'http://104.197.23.70/user/uploadfile';
 //window.uploadUrl = 'http://192.168.2.22:1337/user/uploadfile';
-window.uploadUrl = 'http://localhost:1337/uploadfile/uploadfile';
+window.uploadUrl = 'http://104.197.111.152/uploadfile/uploadfile';
 phonecatControllers.controller('home', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Dashboard");
@@ -118,7 +118,7 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                '<td style="padding:0"><b> Rs.{point.y:.1f}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -631,6 +631,9 @@ phonecatControllers.controller('createVendorsCtrl', function($scope, TemplateSer
 return parseInt(key);
         })
       }
+      if($scope.vendors.offerpercent == undefined || $scope.vendors.offerpercent == 0){
+        $scope.vendors.hasoffer=undefined;
+      }
         NavigationService.saveVendors($scope.vendors, function(data, status) {
 
             $location.url('/vendors');
@@ -698,28 +701,40 @@ phonecatControllers.controller('editVendorsCtrl', function($scope, TemplateServi
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.vendors = {};
+
+    console.log("news");
     NavigationService.getOneVendors($routeParams.id, function(data, status) {
         $scope.vendors = data; //Add More Array
         console.log(data);
         $scope.keepOffer($scope.vendors.hasoffer);
         $scope.selectAmountType($scope.vendors.input);
-        $scope.vendors.hasoffer= ($scope.vendors.hasoffer == true)?"true":"false";
-        $scope.vendors.hasoffer= ($scope.vendors.hasoffer == true)?"true":"false";
+        if($scope.vendors.hasoffer==true){
+          $scope.vendors.hasoffer ="true";
+        }else if($scope.vendors.hasoffer == false){
+          $scope.vendors.hasoffer="false";
+        };
+        $scope.vendors.bannerurl=[];
     });
     $scope.submitForm = function() {
         $scope.vendors._id = $routeParams.id;
+        if($scope.openAmountSelector==true){
+          console.log("tuiadyisu");
+          $scope.vendors.amountselect=_.map($scope.vendors.amountselect,function(key){
+  return parseInt(key);
+          })
+        }
+        if($scope.vendors.offerpercent == undefined || $scope.vendors.offerpercent == 0){
+          $scope.vendors.hasoffer=false;
+        }
+        if($scope.vendors.hasoffer=="true"){
+          console.log("herere");
+          $scope.vendors.hasoffer =true;
+        }else if($scope.vendors.hasoffer == "false"){
+          console.log("herere1");
+          $scope.vendors.hasoffer=false;
+        }
+        console.log($scope.vendors);
         NavigationService.saveVendors($scope.vendors, function(data, status) {
-            $location.url('/vendors');
-        });
-    };
-    $scope.submitForm = function() {
-      if($scope.openAmountSelector==true){
-        $scope.vendors.amountselect=_.map($scope.vendors.amountselect,function(key){
-return parseInt(key);
-        })
-      }
-        NavigationService.saveVendors($scope.vendors, function(data, status) {
-
             $location.url('/vendors');
         });
     };
@@ -727,7 +742,7 @@ return parseInt(key);
         $scope.category = data;
     });
     $scope.removeimagecerti = function() {
-        $scope.vendors.certi = '';
+        $scope.vendors.logourl = '';
     };
     $scope.onFileSelect = function($files, whichone, uploadtype) {
         globalfunction.onFileSelect($files, function(image) {
@@ -747,7 +762,7 @@ return parseInt(key);
                 if (uploadtype == 'multiple') {
                     if ($scope.vendors.bannerurl.length > 0) {
                         _.each(image, function(n) {
-                            $scope.vendors.bannerurl.push(n)
+                            $scope.vendors.bannerurl.push(n);
                         })
                     } else {
                         $scope.vendors.bannerurl = image;
@@ -767,7 +782,6 @@ return parseInt(key);
       }
       if($scope.vendors.hasoffer === true){
         $scope.keepCashback =true;
-        $scope.vendors.offerpercent=0;
       }else{
         $scope.keepCashback =false;
         $scope.vendors.offerpercent=undefined;
