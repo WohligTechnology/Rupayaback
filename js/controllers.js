@@ -105,9 +105,6 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
         legend:{
           enabled:false
         },
-        subtitle: {
-            text: 'Source: WorldClimate.com'
-        },
         xAxis: {
             categories: brands,
             crosshair: true
@@ -1125,19 +1122,12 @@ phonecatControllers.controller('broadcastCtrl', function($scope, TemplateService
     TemplateService.content = 'views/broadcast.html';
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
-    $scope.transaction = {};
-    NavigationService.getOneTransaction($routeParams.id, function(data, status) {
-        $scope.transaction = data; //Add More Array
-    });
+    $scope.notification = {};
     $scope.submitForm = function() {
-        $scope.transaction._id = $routeParams.id;
-        NavigationService.saveTransaction($scope.transaction, function(data, status) {
-            $location.url('/transaction');
+        NavigationService.sendNotification($scope.notification, function(data, status) {
+            $location.url('/broadcast');
         });
     };
-    NavigationService.getUser(function(data, status) {
-        $scope.from = data;
-    });
     //editTransaction
 });
 

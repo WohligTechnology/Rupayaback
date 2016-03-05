@@ -142,6 +142,13 @@ var navigationservice = angular.module('navigationservice', [])
         data: data
       }).success(callback);
     },
+    sendNotification: function(data, callback) {
+      $http({
+        url: adminurl + 'notification/broadcast',
+        method: 'POST',
+        data: data
+      }).success(callback);
+    },
     getOneVendors: function(id, callback) {
       $http({
         url: adminurl + 'vendors/findone',

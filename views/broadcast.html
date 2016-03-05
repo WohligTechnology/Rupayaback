@@ -11,12 +11,14 @@
                   <div class="panel-body">
                     <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">
                       <div class='form-group'>
-                        <label>Name</label>
-                        <input type='text' class='form-control' ng-model='category.name' placeholder='Name' required> </div>
+                        <label>Title</label>
+                        <input type='text' class='form-control' ng-model='notification.title' placeholder='Notification title here..' required> </div>
                         <div class='form-group'>
-                          <label>Name</label>
-                          <input type='text' class='form-control' ng-model='category.name' placeholder='Name' required> </div>
-                        
+                          <label>Body</label>
+                          <textarea type='text' class='form-control' ng-model='notification.body' placeholder='Notification detail here..' required> </textarea>
+
+                        </div>
+
                       <!--Add New Tags-->
                       <div class="text-center" style="padding-bottom:20px;">
                         <button type="submit" class="btn btn-primary all-btn">Submit</button>
