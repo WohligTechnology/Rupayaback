@@ -25,6 +25,9 @@
                             <table class="table table-bordered ">
                                 <thead>
                                     <tr class="bg-dark">
+                                      <th class="text-center">
+                                        Time
+                                      </th>
                                       <th class="text-center">From</th>
                                       <th class="text-center">To</th>
                                       <th class="text-center">Type</th>
@@ -35,6 +38,9 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="value in transaction.data">
+                                      <td class="text-center">
+                                        {{value.timestamp | date : 'medium'}}
+                                      </td>
                                       <td class="text-center">{{value.from}}</td>
                                       <td class="text-center">{{value.to}}</td>
                                       <td class="text-center">{{value.type}}</td>
