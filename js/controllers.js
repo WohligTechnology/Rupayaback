@@ -1155,4 +1155,32 @@ phonecatControllers.controller('broadcastCtrl', function($scope, TemplateService
     //editTransaction
 });
 
+phonecatControllers.controller('paisoPercentCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Change PAiSO percent');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/paisopercent.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.variable={};
+    $scope.findPaisoPercent = function(){
+
+      NavigationService.findVariable(function(resp){
+        if(resp.value !=  false){
+          $scope.variable = resp[0];
+        }
+      });
+    };
+    $scope.findPaisoPercent();
+    $scope.submitForm = function() {
+      console.log("here");
+        NavigationService.saveVariable($scope.variable, function(data, status) {
+          console.log("erere");
+          console.log(data);
+            $location.url('/paisopercent');
+
+        });
+    };
+});
 //Add New Controller

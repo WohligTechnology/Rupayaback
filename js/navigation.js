@@ -1,5 +1,5 @@
-var adminurl = "http://104.197.111.152/";
-// var adminurl = "http://localhost:1337/";
+// var adminurl = "http://104.197.111.152/";
+var adminurl = "http://192.168.1.122:1337/";
 var adminlogin = {
   "username": "admin@admin.com",
   "password": "admin123"
@@ -41,6 +41,11 @@ var navigationservice = angular.module('navigationservice', [])
       name: 'Broadcast',
       active: '',
       link: '#/broadcast',
+      subnav: []
+    },{
+      name: 'Change PAiSO percent',
+      active: '',
+      link: '#/paisopercent',
       subnav: []
     } //Add New Left
 
@@ -97,6 +102,19 @@ var navigationservice = angular.module('navigationservice', [])
           'pagesize': parseInt(user.limit),
           'pagenumber': parseInt(user.page)
         }
+      }).success(callback);
+    },
+    findVariable: function (callback) {
+      $http({
+        url: adminurl + 'variable/find',
+        method: 'POST'
+      }).success(callback);
+    },
+    saveVariable: function (userData,callback) {
+      $http({
+        url: adminurl + 'variable/save',
+        method: 'POST',
+        data: userData
       }).success(callback);
     },
     findLimitedBanner: function(banner, callback) {

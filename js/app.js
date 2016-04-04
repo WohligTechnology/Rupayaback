@@ -68,6 +68,9 @@ firstapp.config(
             }).when('/broadcast', {
                 templateUrl: 'views/template.html',
                 controller: 'broadcastCtrl'
+            }).when('/paisopercent', {
+                templateUrl: 'views/template.html',
+                controller: 'paisoPercentCtrl'
             }).//Add New Path
 
         otherwise({
