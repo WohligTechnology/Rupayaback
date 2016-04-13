@@ -713,7 +713,6 @@ phonecatControllers.controller('editVendorsCtrl', function($scope, TemplateServi
         }else if($scope.vendors.hasoffer == false){
           $scope.vendors.hasoffer="false";
         };
-        $scope.vendors.bannerurl=[];
     });
     $scope.submitForm = function() {
         $scope.vendors._id = $routeParams.id;

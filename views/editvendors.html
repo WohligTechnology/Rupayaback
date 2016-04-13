@@ -54,8 +54,8 @@
                <label for='exampleInputEmail1'>Banners</label>
                <div class=''>
                   <div class='img-box'>
-                     <ul ui-sortable ng-model='vendors.bannerurl' ng-if='vendors.bannerurl.length!=0'>
-                        <li ng-repeat='bill in vendors.bannerurl' class='many-img'><img ng-src='{{bill | uploadpath}}' ng-if='vendors.bannerurl.length!=0' width='200'>
+                     <ul ui-sortable ng-model='vendors.bannerurl' ng-if='vendors.bannerurl.length !==0'>
+                        <li ng-repeat='bill in vendors.bannerurl' class='many-img'><img ng-src='{{bill | uploadpath}}'  width='200'>
                            <button type='button' ng-click='removeimagehomeslide(vendors.bannerurl.indexOf(bill));' class='btn btn-danger close-btn'><i class='glyphicon glyphicon-trash'></i></button>
                         </li>
                      </ul>
