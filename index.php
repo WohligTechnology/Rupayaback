@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="firstapp">
 
 <head ng-controller="headerctrl">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title ng-bind="'PAiSO - '+template.title"></title>
     <!--    <link rel="shortcut icon" href="img/favicon.png" />-->
     <link rel="stylesheet" type="text.css" href="bower_components/angular-ui-select/dist/select.css" />
@@ -10,10 +11,10 @@
     <link rel="stylesheet" type="text/css" href="lib/css/animate.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/ngDialog-theme-plain.css" />
-    <link rel="stylesheet" type="text.css" href="lib/css/ngDialog.css" />
+    <link rel="stylesheet" type="text/css" href="lib/css/ngDialog.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="linearicons/icons.css" />
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- <script src="lib/js/jquery-1.11.1.min.js"></script>
     <script src="lib/js/angular.js"></script> -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>

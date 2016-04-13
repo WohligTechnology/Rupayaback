@@ -5,6 +5,9 @@
 a {
     color: #0060aa;
 }
+.ln-2x { font-size: 20px; }
+.ln-3x { font-size: 30px; }
+.ln-4x { font-size: 40px; }
 a:hover {
     color: #0060aa;
 }
